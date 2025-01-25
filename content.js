@@ -40,7 +40,14 @@ async function processImages() {
     }
 }
 
-processImages();
+// Listen for messages from content.js
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "startGeneratingAltText") {
+        processImages();
+    }
+});
+
+
 
 function checkImageUrl(imageURL) {
     return new Promise((resolve, reject) => {

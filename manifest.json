@@ -5,7 +5,7 @@
     "description": "A Chrome extension to improve accessibility by adding alt tags to images.",
     "permissions": [
         "scripting",
-        "activeTab", 
+        "activeTab",
         "storage"
     ],
     "host_permissions": [
