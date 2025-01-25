@@ -77,7 +77,7 @@
         #scoreDisplay {
             font-weight: 700;
             font-size: 16px;
-            margin-bottom: 0px;
+            margin: 0px;
         }
 
         .score {
@@ -103,6 +103,8 @@
             font-size: 9px;
             font-weight: 400px;
             margin: 0px;
+            line-height: 130%;
+            margin-bottom: 10px;
         }
 
         .accessibilityScoreBox {
@@ -110,6 +112,7 @@
             padding: 10px;
             border-radius: 6px;
             display: flex;
+            place-items: center;
         }
 
         .accessibilityTextBox {
@@ -117,14 +120,14 @@
             margin-left: 10px;
             line-height: 90%;
             margin-right: 3px;
+            padding: 5px 0 5px 0;
         }
 
         .learnMoreButton {
             color: white;
             background-color: black;
             font-weight: bold;
-            font-size: 10px;
-            padding: 5px;
+            padding: 3px;
             display: flex;
             place-items: center;
             border-radius: 1.5rem;
@@ -135,8 +138,8 @@
             color: black;
             background-color: white;
             border-radius: 50%;
-            width: 15px;
-            height: 15px;
+            width: 10px;
+            height: 10px;
             padding: 5px;
             margin-left: 10px;
         }
@@ -150,6 +153,18 @@
             line-height: 90%;
             margin: 0px;
             padding-left: 10px;
+            font-size: 11px;
+        }
+
+        .altTextCount {
+            background-color: #2D30BF;
+            color: white;
+            border-radius: 1.5rem;
+            padding: 10px 5px 10px 5px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0px 30px 10px 30px;
+            display: none;
         }
     </style>
 </head>
@@ -171,6 +186,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
         </svg>
     </button>
+    <p class="altTextCount">Added 7 alt texts to images</p>
     <div class="accessibilityScoreBox">
         <div class="score">
             <p class="scoreText">5</p>
