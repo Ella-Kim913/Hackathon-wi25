@@ -116,6 +116,7 @@
             text-align: start;
             margin-left: 10px;
             line-height: 90%;
+            margin-right: 3px;
         }
 
         .learnMoreButton {
@@ -124,19 +125,31 @@
             font-weight: bold;
             font-size: 10px;
             padding: 5px;
+            display: flex;
+            place-items: center;
+            border-radius: 1.5rem;
+            
         }
 
-        .learnMoreIcon {
+        #learnMoreIcon {
             color: black;
             background-color: white;
             border-radius: 50%;
-            width: 10px;
-            height: 10px;
+            width: 15px;
+            height: 15px;
+            padding: 5px;
+            margin-left: 10px;
         }
 
         .learnMoreDiv {
             display: flex;
             
+        }
+
+        .learnMoreButtonText {
+            line-height: 90%;
+            margin: 0px;
+            padding-left: 10px;
         }
     </style>
 </head>
@@ -167,7 +180,8 @@
             <p id="scoreDisplay">Accessibility Score </p>
             <p class="disclaimer">*Calculated based on WCAG standards</p>
             <div class="learnMoreDiv">
-                <button class="learnMoreButton">Learn more
+                <button class="learnMoreButton">
+                    <p class="learnMoreButtonText">Learn more</p>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6" id="learnMoreIcon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
