@@ -31,8 +31,9 @@ async function processImages() {
                 const altText = await requestImageAnalysis(imageURL);
                 img.alt = altText;
                 console.log(`Updated alt text: ${altText}`);
+            } else {
+                console.log("Image must be compressed");
             }
-
         } catch (error) {
             console.log(error);
         }
@@ -42,15 +43,14 @@ async function processImages() {
 processImages();
 
 function checkImageUrl(imageURL) {
-
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         const img = new Image();
         img.src = imageURL;
 
-
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-    });
+        img.onload = () => {
+            resolve();
+        }
+    })
 }
 
 
