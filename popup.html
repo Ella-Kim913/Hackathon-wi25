@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AltVision Accessibility Score</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 250px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 30px;
+            margin: 10px;
+            cursor: pointer;
+            border-color: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 2px 0;
+        }
+
+        #scoreDisplay {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #power-button {
+            width: 50px;
+            height: 50px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>AltVision</h2>
+    <button id="analyzeButton">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="size-6" id="power-button">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
+        </svg>
+    </button>
+    <p id="scoreDisplay">Click "Analyze Page" to get the score.</p>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
