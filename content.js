@@ -1,7 +1,6 @@
 
 
 // first get the HTML
-const pageHTML = document.documentElement.outerHTML
 
 async function requestImageAnalysis(imageUrl) {
     return new Promise((resolve) => {
@@ -14,6 +13,7 @@ async function requestImageAnalysis(imageUrl) {
         });
     });
 }
+
 
 async function processImages() {
     const images = document.querySelectorAll("img:not([alt]), img[alt='']");
@@ -44,6 +44,13 @@ async function processImages() {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "startGeneratingAltText") {
         processImages();
+    }
+});
+
+// Listen for messages from content.js
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "getPageHTML") {
+        sendResponse({ html: document.documentElement.outerHTML });
     }
 });
 
