@@ -13,7 +13,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            width: 250px;
+            width: 265px;
             padding: 10px;
             text-align: center;
             background-color: #F8F8F8;
@@ -25,14 +25,15 @@
 
 
         button {
-            padding: 30px;
-            margin-top: 50px;
+            /* padding: 30px; */
+            /* margin-top: 50px; */
             cursor: pointer;
             border: none;
-            border-radius: 50%;
-            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19);
-            background-color: #B50906;
-            margin-bottom: 50px;
+            background-color: transparent;
+            /* border-radius: 50%; */
+            /* box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19);
+            background-color: #B50906; */
+            /* margin-bottom: 70px; */
         }
 
         #scoreDisplay {
@@ -45,6 +46,14 @@
             width: 50px;
             height: 50px;
             color: white;
+            padding: 30px;
+            margin-top: 50px;
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19);
+            background-color: #B50906;
+            margin-bottom: 70px;
         }
 
         #settings-icon {
@@ -66,18 +75,21 @@
         }
 
         #scoreDisplay {
-            font-weight: 100;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 0px;
         }
 
         .score {
             margin: 0px 10px 0px 10px;
+            /* flex-grow: 5px; */
             /* font-size:48px; */
         }
 
         .scoreText {
             font-weight: bold;
             margin: 0px;
-            font-size:48px;
+            font-size: 48px;
             line-height: 100%;
         }
 
@@ -87,11 +99,44 @@
             margin: 0px;
         }
 
+        .disclaimer {
+            font-size: 9px;
+            font-weight: 400px;
+            margin: 0px;
+        }
+
         .accessibilityScoreBox {
             background-color: #93CCFD;
             padding: 10px;
             border-radius: 6px;
             display: flex;
+        }
+
+        .accessibilityTextBox {
+            text-align: start;
+            margin-left: 10px;
+            line-height: 90%;
+        }
+
+        .learnMoreButton {
+            color: white;
+            background-color: black;
+            font-weight: bold;
+            font-size: 10px;
+            padding: 5px;
+        }
+
+        .learnMoreIcon {
+            color: black;
+            background-color: white;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+        }
+
+        .learnMoreDiv {
+            display: flex;
+            
         }
     </style>
 </head>
@@ -115,10 +160,21 @@
     </button>
     <div class="accessibilityScoreBox">
         <div class="score">
-            <p class="scoreText">5</p> 
+            <p class="scoreText">5</p>
             <p class="scoreOutOf">Out of 10</p>
         </div>
-        <p id="scoreDisplay">Click </p>
+        <div class="accessibilityTextBox">
+            <p id="scoreDisplay">Accessibility Score </p>
+            <p class="disclaimer">*Calculated based on WCAG standards</p>
+            <div class="learnMoreDiv">
+                <button class="learnMoreButton">Learn more
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6" id="learnMoreIcon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
 
 
