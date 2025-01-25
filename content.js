@@ -1,6 +1,9 @@
 
-
-// first get the HTML
+chrome.storage.local.get(["altTextEnabled"], (result) => {
+    if (result.altTextEnabled) {
+        processImages();
+    }
+});
 
 async function requestImageAnalysis(imageUrl) {
     return new Promise((resolve) => {
