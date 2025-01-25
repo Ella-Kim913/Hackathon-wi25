@@ -1,6 +1,35 @@
 
 
 // first get the HTML
+const pageHTML = document.documentElement.outerHTML;
+
+async function processImages() {
+    const images = docutment.querySelectorAll("img:not([alt]), img[alt='']");
+
+    for(let img of images)  {
+        const imageURL = img.src
+
+        if(checkImageUrl(imageURL).then(async result => {
+            const fileImg = await fetch(imageURL).then(r => r.blob());
+            if(fileImg.size > 0 && fileImg.size < 20971520) {
+                // send directly to backgorund
+            } else {
+                // compress
+            }
+        }));
+    }
+}
+
+function checkImageUrl(imageURL) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = imageURL;
+
+        img.onload = () => {
+            resolve();
+        }
+    })
+}
 
 // check the img do not have ALT tag
 // if the size of the img is less then 1 ignore
