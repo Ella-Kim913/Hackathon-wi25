@@ -1,24 +1,29 @@
 
 
 // first get the HTML
-const pageHTML = document.documentElement.outerHTML;
+const pageHTML = document.documentElement.outerHTML
 
 async function processImages() {
-    const images = docutment.querySelectorAll("img:not([alt]), img[alt='']");
+    const images = document.querySelectorAll("img:not([alt]), img[alt='']");
 
     for(let img of images)  {
         const imageURL = img.src
-
-        if(checkImageUrl(imageURL).then(async result => {
+        console.log(imageURL);
+        try {
+            checkImageUrl(imageURL);
             const fileImg = await fetch(imageURL).then(r => r.blob());
             if(fileImg.size > 0 && fileImg.size < 20971520) {
-                // send directly to backgorund
+                console.log("Image has appropriate dimemsions");
             } else {
-                // compress
+                console.log("Image must be compressed");
             }
-        }));
+        } catch(error) {
+
+        }
     }
 }
+
+processImages();
 
 function checkImageUrl(imageURL) {
     return new Promise((resolve, reject) => {
@@ -30,6 +35,8 @@ function checkImageUrl(imageURL) {
         }
     })
 }
+
+
 
 // check the img do not have ALT tag
 // if the size of the img is less then 1 ignore
