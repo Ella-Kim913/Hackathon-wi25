@@ -8,11 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
             width: 265px;
             padding: 10px;
             text-align: center;
@@ -72,12 +71,13 @@
         h1 {
             font-size: small;
             font-weight: bold;
+            font-family: "Kantumruy Pro";
         }
 
         #scoreDisplay {
             font-weight: 700;
             font-size: 16px;
-            margin-bottom: 0px;
+            margin: 0px;
         }
 
         .score {
@@ -103,6 +103,8 @@
             font-size: 9px;
             font-weight: 400px;
             margin: 0px;
+            line-height: 130%;
+            margin-bottom: 10px;
         }
 
         .accessibilityScoreBox {
@@ -110,6 +112,7 @@
             padding: 10px;
             border-radius: 6px;
             display: flex;
+            place-items: center;
         }
 
         .accessibilityTextBox {
@@ -117,14 +120,14 @@
             margin-left: 10px;
             line-height: 90%;
             margin-right: 3px;
+            padding: 5px 0 5px 0;
         }
 
         .learnMoreButton {
             color: white;
             background-color: black;
             font-weight: bold;
-            font-size: 10px;
-            padding: 5px;
+            padding: 3px;
             display: flex;
             place-items: center;
             border-radius: 1.5rem;
@@ -135,8 +138,8 @@
             color: black;
             background-color: white;
             border-radius: 50%;
-            width: 15px;
-            height: 15px;
+            width: 10px;
+            height: 10px;
             padding: 5px;
             margin-left: 10px;
         }
@@ -150,6 +153,29 @@
             line-height: 90%;
             margin: 0px;
             padding-left: 10px;
+            font-size: 11px;
+        }
+
+        #altTextCount {
+            background-color: #2D30BF;
+            color: white;
+            border-radius: 1.5rem;
+            padding: 10px 5px 10px 5px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0px 30px 10px 30px;
+            display: none;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .logo {
+            display: flex;
+            place-items: center;
         }
     </style>
 </head>
@@ -157,7 +183,10 @@
 <body>
 
     <div class="header">
-        <h1>AltVision</h1>
+        <div class="logo">
+            <img src="newIcon.png" alt="purple blooming eye icon" class="icon">
+            <h1>alt vision</h1>
+        </div>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="size-6" id="settings-icon">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -171,6 +200,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
         </svg>
     </button>
+    <p id="altTextCount">Added 7 alt texts to images</p>
     <div class="accessibilityScoreBox">
         <div class="score">
             <p class="scoreText"></p>
@@ -180,13 +210,15 @@
             <p id="scoreDisplay">Accessibility Score </p>
             <p class="disclaimer">*Calculated based on WCAG standards</p>
             <div class="learnMoreDiv">
-                <button class="learnMoreButton">
-                    <p class="learnMoreButtonText">Learn more</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6" id="learnMoreIcon">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                    </svg>
-                </button>
+                <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank">
+                    <button class="learnMoreButton">
+                        <p class="learnMoreButtonText">Learn more</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6" id="learnMoreIcon">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </button>
+                </a>
             </div>
         </div>
     </div>
