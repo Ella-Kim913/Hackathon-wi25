@@ -21,16 +21,18 @@ async function processImages() {
     for (let img of images) {
         const imageURL = img.src
         try {
-            checkImageUrl(imageURL);
+            await checkImageUrl(imageURL);
             const fileImg = await fetch(imageURL).then(r => r.blob());
-            if (fileImg.size > 0 && fileImg.size < 20971520) {
-                console.log("Image has appropriate dimemsions");
+
+            if (fileImg.size > 50) {
+                if (fileImg.size > 20971520) {
+                    // compress it
+                }
                 const altText = await requestImageAnalysis(imageURL);
                 img.alt = altText;
                 console.log(`Updated alt text: ${altText}`);
-            } else {
-                console.log("Image must be compressed");
             }
+
         } catch (error) {
             console.log(error);
         }
@@ -40,14 +42,15 @@ async function processImages() {
 processImages();
 
 function checkImageUrl(imageURL) {
-    return new Promise((resolve, reject) => {
+
+    return new Promise((resolve) => {
         const img = new Image();
         img.src = imageURL;
 
-        img.onload = () => {
-            resolve();
-        }
-    })
+
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+    });
 }
 
 
