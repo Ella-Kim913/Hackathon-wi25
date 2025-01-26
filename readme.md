@@ -8,6 +8,13 @@ Ella Kim, Laura Khotemlyansky, Kira Brodsky
 
 Chrome extension that injects AI generated image descriptions into missing alt attributes for screen readers to read. For the future, the chrome extension would be able to restructure the HTML, through semantic tags and ARIA labels, for better usability.
 
+
+## Set Up
+
+1. Open Chrome DevTools → Background Service Worker Console.
+2. Run the command from setup.js with the key-url from Azure.
+
+
 ## Improvement
 
 Since we want to ensure that the descriptions that are being generated are accurately describing the images, we would user test with volunteers who are visually impared and have them tell us whether they believe that the description being generated is detailed enough for their use.

@@ -1,14 +1,3 @@
-// Setting API credentials in local storage
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.local.set({
-        subscriptionKey: "CIK5iGNxyw58wVrmyDV7AGYGXnXgK5qZmRClUaWWjWEI3tltwHCQJQQJ99BAACYeBjFXJ3w3AAAFACOG6k9D",
-        endpoint: "https://visiontestingforhackathon.cognitiveservices.azure.com",
-
-        targetUrl: "https://ai-ghyeon9518ai025573802926.openai.azure.com/openai/deployments/gpt-35-turbo-16k/chat/completions?api-version=2024-08-01-preview",
-        key: "M57JDoo06CkzMCqxlVY7nCzM3Pn00B3iK8UWMbmeH2JNWJblYDQ0JQQJ99BAACHYHv6XJ3w3AAAAACOGJd8B"
-    },);
-});
-
 // Retrieving API Credentials from local storage
 async function getApiCredentials() {
     return new Promise((resolve) => {
