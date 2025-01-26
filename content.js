@@ -44,6 +44,14 @@ async function processImages() {
             console.log(error);
         }
     }
+
+    // if (counter > 0) {
+    //     console.log("sending message");
+    //     chrome.runtime.sendMessage({
+    //         action: "altTextProcessingDone",
+    //         count: counter,
+    //     });
+    // }
 }
 
 // Listen for messages from content.js

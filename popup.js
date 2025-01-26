@@ -1,14 +1,4 @@
 document.getElementById("analyzeButton").addEventListener("click", () => {
-    if (document.getElementById("power-button").style.backgroundColor == "green") {
-        document.getElementById("power-button").style.backgroundColor = "#B50906";
-        document.getElementById("altTextCount").style.display = "none";
-        document.getElementById("power-button").style.boxShadow = "0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19)";
-    } else {
-        document.getElementById("power-button").style.backgroundColor = "green";
-        document.getElementById("altTextCount").style.display = "block";
-        document.getElementById("power-button").style.boxShadow = "inset 0 10px 10px 0 rgba(0, 0, 0, 0.2), inset 0 10px 10px 0 rgba(0, 0, 0, 0.2)";
-
-    }
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "startGeneratingAltText" }, (response) => {
 
@@ -17,6 +7,9 @@ document.getElementById("analyzeButton").addEventListener("click", () => {
                 if (result.altTextEnabled) {
                     chrome.storage.local.set({ altTextEnabled: false }, () => {
                     });
+                    document.getElementById("power-button").style.backgroundColor = "#B50906";
+                    document.getElementById("altTextCount").style.display = "none";
+                    document.getElementById("power-button").style.boxShadow = "0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19)";
                     return;
                 }
 
@@ -25,6 +18,9 @@ document.getElementById("analyzeButton").addEventListener("click", () => {
                     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
                         chrome.tabs.sendMessage(tabs[0].id, { action: "startGeneratingAltText" });
                     });
+                    document.getElementById("power-button").style.backgroundColor = "green";
+                    document.getElementById("altTextCount").style.display = "block";
+                    document.getElementById("power-button").style.boxShadow = "inset 0 10px 10px 0 rgba(0, 0, 0, 0.2), inset 0 10px 10px 0 rgba(0, 0, 0, 0.2)";
                 });
             });
 
@@ -44,6 +40,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//     if (message === "altTextProcessingDone", message.counter) {
+//         console.log("get message");
+//         const numElement = document.querySelector(".numAltText");
+//         if (numElement) {
+//             numElement.innerText = message.counter;
+//         }
+//     }
+// });
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -65,15 +71,11 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "getPageHTML" }, (response) => {
-
             if (response && response.html) {
                 // Now request AI analysis from background.js
                 requestIAcceScore(response.html).then((score) => {
-                    console.log(score);
                     let newScore = parseFloat(score);
-                    console.log(newScore);
-                    newScore = Math.trunc(newScore);
-                    console.log(newScore);
+                    // newScore = Math.trunc(newScore);
                     // Select the first element with class "scoreText"
                     const scoreElement = document.querySelector(".scoreText");
 
@@ -85,6 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 })
+
+
 
 
 
