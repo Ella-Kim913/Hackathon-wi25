@@ -2,9 +2,11 @@ document.getElementById("analyzeButton").addEventListener("click", () => {
     if (document.getElementById("power-button").style.backgroundColor == "green") {
         document.getElementById("power-button").style.backgroundColor = "#B50906";
         document.getElementById("altTextCount").style.display = "none";
+        document.getElementById("power-button").style.boxShadow = "0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19)";
     } else {
         document.getElementById("power-button").style.backgroundColor = "green";
         document.getElementById("altTextCount").style.display = "block";
+        document.getElementById("power-button").style.boxShadow = "inset 0 10px 10px 0 rgba(0, 0, 0, 0.2), inset 0 10px 10px 0 rgba(0, 0, 0, 0.2)";
 
     }
 
