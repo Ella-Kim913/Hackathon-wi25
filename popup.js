@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 })
 
-
+// Retreieves accessibility score 
 document.addEventListener("DOMContentLoaded", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "getPageHTML" }, (response) => {
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
+// Sends request for accessiblity score
 async function requestIAcceScore(html) {
     return new Promise((resolve) => {
         chrome.runtime.sendMessage({ action: "analyzeAcceScore", html }, (response) => {

@@ -1,11 +1,14 @@
+// sets counter var for num of alt text generated
 let counter = 0;
 
+// Enables image processing
 chrome.storage.local.get(["altTextEnabled"], (result) => {
     if (result.altTextEnabled) {
         processImages();
     }
 });
 
+// Send request to determine URL validity
 async function requestImageAnalysis(imageUrl) {
     return new Promise((resolve) => {
         chrome.runtime.sendMessage({ action: "analyzeImage", imageUrl }, (response) => {
@@ -18,7 +21,7 @@ async function requestImageAnalysis(imageUrl) {
     });
 }
 
-
+// Finds images with an empty/no alt text tag and appends generated alt text
 async function processImages() {
     const images = document.querySelectorAll("img:not([alt]), img[alt='']");
 
@@ -39,7 +42,7 @@ async function processImages() {
 
             if (fileImg.size > 50) {
                 if (fileImg.size > 20971520) {
-                    // compress it
+                    // compress (future implementation)
                 }
                 const altText = await requestImageAnalysis(imageURL);
                 img.alt = altText;
@@ -60,33 +63,9 @@ async function processImages() {
             count: counter,
         });
     }
-
-    // counter = 0;
 }
 
-// Listen for messages from content.js
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === "startGeneratingAltText") {
-        processImages();
-    }
-});
-
-// Listen for messages from content.js
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === "getPageHTML") {
-        sendResponse({ html: document.documentElement.outerHTML });
-    }
-});
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === "getCounterValue") {
-        sendResponse({ counter }); // Send the counter value to the popup
-    }
-});
-
-
-
-
+// Validates the image URL
 function checkImageUrl(imageURL) {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -98,11 +77,30 @@ function checkImageUrl(imageURL) {
     })
 }
 
+// Listen to start generating alt text
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "startGeneratingAltText") {
+        processImages();
+    }
+});
 
+// Listen fto send the web page's HTML
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "getPageHTML") {
+        sendResponse({ html: document.documentElement.outerHTML });
+    }
+});
 
+// Sends the counter value to the pop-up
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "getCounterValue") {
+        sendResponse({ counter }); 
+    }
+});
+
+// Sends request for accessibility score generation 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "getAccessibilityScore") {
         analyzeAccessibility(fullPageHTML).then(score => sendResponse({ score }));
-        //return true; // Keep the message channel open for async response
     }
 });

@@ -1,3 +1,4 @@
+// Setting API credentials in local storage
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.set({
         subscriptionKey: "CIK5iGNxyw58wVrmyDV7AGYGXnXgK5qZmRClUaWWjWEI3tltwHCQJQQJ99BAACYeBjFXJ3w3AAAFACOG6k9D",
@@ -8,6 +9,7 @@ chrome.runtime.onInstalled.addListener(() => {
     },);
 });
 
+// Retrieving API Credentials from local storage
 async function getApiCredentials() {
     return new Promise((resolve) => {
         chrome.storage.local.get(["subscriptionKey", "endpoint", "targetUrl", "key"], (result) => {
@@ -21,16 +23,17 @@ async function getApiCredentials() {
 }
 
 
-// Listen for messages from content.js
+// Listen for messages from content.js to generate alt text
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "analyzeImage" && message.imageUrl) {
         analyzeImage(message.imageUrl).then((altText) => {
             sendResponse({ altText });
         });
-        return true; // Keep the channel open for async response
+        return true; // Keep the channel open 
     }
 });
 
+// Generates and returns alt text for an image using Azure AI
 async function analyzeImage(imageUrl) {
 
     const credentials = await getApiCredentials();
@@ -58,23 +61,23 @@ async function analyzeImage(imageUrl) {
         }
 
         const data = await response.json();
-        return data.captionResult.text; // Extracts generated caption
+        return data.captionResult.text; 
     } catch (error) {
         return "Image description not available";
     }
 }
 
-// Listen for messages from content.js
+// Listen for messages from content.js to generate accessiblity score
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "analyzeAcceScore", message.html) {
         analyzeAccessibility(message.html).then((score) => {
             sendResponse({ score });
         });
-        return true; // Keep the channel open for async response
+        return true; 
     }
 });
 
-
+// Generated an accessibility score for the webpage by prompting ChatGPT
 async function analyzeAccessibility(htmlContent) {
 
     const credentials = await getApiCredentials();
