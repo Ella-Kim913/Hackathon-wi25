@@ -94,7 +94,7 @@ function checkImageUrl(imageURL) {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "getAccessibilityScore") {
         analyzeAccessibility(fullPageHTML).then(score => sendResponse({ score }));
-        return true; // Keep the message channel open for async response
+        //return true; // Keep the message channel open for async response
     }
 });
 
