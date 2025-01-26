@@ -21,11 +21,23 @@ document.getElementById("analyzeButton").addEventListener("click", () => {
                     document.getElementById("power-button").style.backgroundColor = "green";
                     document.getElementById("altTextCount").style.display = "block";
                     document.getElementById("power-button").style.boxShadow = "inset 0 10px 10px 0 rgba(0, 0, 0, 0.2), inset 0 10px 10px 0 rgba(0, 0, 0, 0.2)";
+
+
+                    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+                        if (message === "altTextProcessingDone", message.counter) {
+                            const numElement = document.querySelector(".numAltText");
+                            if (numElement) {
+                                numElement.innerText = message.counter;
+                            }
+                        }
+                    });
+
                 });
             });
 
         });
     });
+
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -41,15 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-//     if (message === "altTextProcessingDone", message.counter) {
-//         console.log("get message");
-//         const numElement = document.querySelector(".numAltText");
-//         if (numElement) {
-//             numElement.innerText = message.counter;
-//         }
-//     }
-// });
 
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,4 +1,3 @@
-
 let counter = 0;
 
 chrome.storage.local.get(["altTextEnabled"], (result) => {
@@ -27,7 +26,16 @@ async function processImages() {
         const imageURL = img.src
         try {
             await checkImageUrl(imageURL);
-            const fileImg = await fetch(imageURL).then(r => r.blob());
+
+            // Attempt to fetch the image
+            const response = await fetch(imageURL);
+
+            if (!response.ok) {
+                continue; // Skip this image
+            }
+
+            // Convert response to a blob
+            const fileImg = await response.blob();
 
             if (fileImg.size > 50) {
                 if (fileImg.size > 20971520) {
@@ -45,13 +53,15 @@ async function processImages() {
         }
     }
 
-    // if (counter > 0) {
-    //     console.log("sending message");
-    //     chrome.runtime.sendMessage({
-    //         action: "altTextProcessingDone",
-    //         count: counter,
-    //     });
-    // }
+    if (counter > 0) {
+        console.log("sending message");
+        chrome.runtime.sendMessage({
+            action: "altTextProcessingDone",
+            count: counter,
+        });
+    }
+
+    // counter = 0;
 }
 
 // Listen for messages from content.js
