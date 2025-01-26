@@ -8,12 +8,7 @@ document.getElementById("analyzeButton").addEventListener("click", () => {
 
     }
 
-    // if (document.getElementById("altTextCount").style.display == "none"){
-    //     document.getElementById("altTextCount").style.display = "block";
-    // } else {
-    //     document.getElementById("altTextCount").style.display == "none";
-    // }
-    document.getElementById("power-button").style.boxShadow = "0 -2px -3px 0 rgba(0, 0, 0, 0.2), 0 -6px -7px 0 rgba(0, 0, 0, 0.19)";
+
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "startGeneratingAltText" }, (response) => {
             // if (response && response.score) {
