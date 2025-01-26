@@ -7,12 +7,14 @@ document.getElementById("analyzeButton").addEventListener("click", () => {
         document.getElementById("altTextCount").style.display = "block";
 
     }
-
     document.getElementById("power-button").style.boxShadow = "0 -2px -3px 0 rgba(0, 0, 0, 0.2), 0 -6px -7px 0 rgba(0, 0, 0, 0.19)";
+
+
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "startGeneratingAltText" }, (response) => {
 
             chrome.storage.local.get(["altTextEnabled"], (result) => {
+                console.log(result.altTextEnabled);
                 if (result.altTextEnabled) {
                     chrome.storage.local.set({ altTextEnabled: false }, () => {
                     });
@@ -30,6 +32,20 @@ document.getElementById("analyzeButton").addEventListener("click", () => {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "getCounterValue" }, (response) => {
+            if (response) {
+                const numElement = document.querySelector(".numAltText");
+                if (numElement) {
+                    numElement.innerText = response.counter;
+                }
+            }
+        });
+    });
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
     chrome.storage.local.get(["altTextEnabled"], (result) => {
@@ -70,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 
-const pageHTML = document.documentElement.outerHTML
 
 async function requestIAcceScore(html) {
     return new Promise((resolve) => {
@@ -83,5 +98,3 @@ async function requestIAcceScore(html) {
         });
     });
 }
-
-requestIAcceScore(pageHTML);
