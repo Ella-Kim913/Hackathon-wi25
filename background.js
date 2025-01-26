@@ -89,7 +89,7 @@ async function analyzeAccessibility(htmlContent) {
         messages: [
             {
                 role: "system",
-                content: "You are an AI assistant that evaluates web pages for accessibility based on WCAG 2.1 standards. Provide an accessibility score (1-10) as Integer format only"
+                content: "You are an AI assistant that evaluates web pages for accessibility based on WCAG 2.1 standards. Provide an accessibility score (1-10) as Integer format only. Do not include any other value besides score"
             },
             {
                 role: "user",

@@ -1,4 +1,6 @@
 
+let counter = 0;
+
 chrome.storage.local.get(["altTextEnabled"], (result) => {
     if (result.altTextEnabled) {
         processImages();
@@ -33,6 +35,7 @@ async function processImages() {
                 }
                 const altText = await requestImageAnalysis(imageURL);
                 img.alt = altText;
+                counter++;
                 console.log(`Updated alt text: ${altText}`);
             } else {
                 console.log("Image must be compressed");
@@ -41,6 +44,14 @@ async function processImages() {
             console.log(error);
         }
     }
+
+    // if (counter > 0) {
+    //     console.log("sending message");
+    //     chrome.runtime.sendMessage({
+    //         action: "altTextProcessingDone",
+    //         count: counter,
+    //     });
+    // }
 }
 
 // Listen for messages from content.js
@@ -57,6 +68,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
 });
 
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "getCounterValue") {
+        sendResponse({ counter }); // Send the counter value to the popup
+    }
+});
+
+
 
 
 function checkImageUrl(imageURL) {
@@ -72,34 +90,9 @@ function checkImageUrl(imageURL) {
 
 
 
-// check the img do not have ALT tag
-// if the size of the img is less then 1 ignore
-// ignore CROS or unvalid url
-// if its too bigger, then need to make it smaller using Canvas
-
-
-
-// possible errors
-//Error: The image dimension is not allowed to be smaller than 50 and larger than 16000.
-//Error: The provided image url is not accessible.
-
-// add the alt tag with the API call - background.js
-// update
-
-// get the total number of alt tag updated
-// send back to the popup JS
-
-
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "getAccessibilityScore") {
         analyzeAccessibility(fullPageHTML).then(score => sendResponse({ score }));
         //return true; // Keep the message channel open for async response
     }
 });
-
-
-
-
-// 
-
